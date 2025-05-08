@@ -51,7 +51,7 @@ if response.status_code == 200:
                     print(json.dumps(filtered_data, indent=4, ensure_ascii=False))
 
                     # JSON 파일로 저장
-                    with open("filtered_bills.json", "w", encoding="utf-8") as f:
+                    with open("law.json", "w", encoding="utf-8") as f:
                         json.dump(filtered_data, f, ensure_ascii=False, indent=2)
                     print("\n📁 'filtered_committee_members.json' 파일로 저장 완료.")
                 else:
