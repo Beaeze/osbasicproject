@@ -59,14 +59,22 @@ if response.status_code == 200:
                             
                             # 필터링을 위한 필드 매핑
                             target_fields = ["HG_NM", "POLY_NM", "MONA_CD", "CMITS", "TEL_NO", "E_MAIL", "HOMEPAGE"]
-                            
+                            korean_labels = {
+                                "HG_NM": "이름",
+                                "POLY_NM": "정당",
+                                "MONA_CD": "의원코드",
+                                "CMITS": "소속위원회",
+                                "TEL_NO": "전화번호",
+                                "E_MAIL": "이메일",
+                                "HOMEPAGE": "홈페이지"
+                            }
                             # 발견된 필드 매핑
                             found_fields = {}
                             for field in target_fields:
                                 found = False
                                 # 정확히 일치하는 필드 확인
                                 if field in first_row:
-                                    found_fields[field] = field
+                                    found_fields[korean_labels[field]] = field
                                     found = True
                                 # 유사한 필드 찾기 (대소문자 구분 없이)
                                 else:
@@ -78,7 +86,7 @@ if response.status_code == 200:
                                             (field == "POLY_NM" and ("party" in key_lower or "poly" in key_lower)) or
                                             (field == "MONA_CD" and ("code" in key_lower or "cd" in key_lower)) or
                                             (field == "CMITS" and ("committee" in key_lower or "cmit" in key_lower))):
-                                            found_fields[field] = key
+                                            found_fields[korean_labels[field]] = key
                                             found = True
                                             break
                                 if not found:
